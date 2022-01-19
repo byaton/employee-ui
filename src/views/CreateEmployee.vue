@@ -7,11 +7,12 @@
       <input
         type="button"
         :disabled="enableStatus"
-        value="submit"
+        :value="buttonText"
         @click="
           saveEmployee({
             id: genEmpId,
             name: eName,
+            isUpdate,
           })
         "
       />
@@ -25,41 +26,34 @@ export default {
     return {
       eName: this.employeeName,
       emplName: "",
-      genEmpId:
-        this.employeeId ||
-        Math.max(this.$store.state.empList.map((m) => m.id)) + 1,
-      //enableStatus: !!this.genEmpId && !!this.eName,
+      buttonText: this.employeeId ? "Update" : "Submit",
+      isUpdate: !!this.employeeId,
     };
   },
   methods: {
     ...mapActions(["saveEmployee", "getEmployees"]),
-    // submitClick: async (empId, empName) => {
-    //   console.log("Amit3", empId, empName);
-    //   // await this.saveEmployee(empId, empName);
-
-    //   // await this.$store.dispatch("saveEmployee", {
-    //   //   id: empId,
-    //   //   name: empName,
-    //   // });
-    // },
   },
   props: ["employeeId", "employeeName"],
   mounted() {
-    this.$store.dispatch("getEmployees");
+    if (this.$store.state.empList.length === 0) {
+      this.$store.dispatch("getEmployees");
+    }
   },
   computed: {
     ...mapState["empList"],
     enableStatus() {
-      console.log("Amit12", this);
       return !this.genEmpId || !this.eName;
     },
-    // submitClick() {
-    //   console.log("Amit3", this.genEmpId, this.eName);
-    //   const employeeId = this.genEmpId;
-    //   const employeeName = this.eName;
-    //   this.saveEmployee({employeeId, employeeName});
-    //   return true;
-    // },
+    genEmpId() {
+      let retEmpId = 0;
+      retEmpId = this.employeeId || retEmpId;
+      const storeEmpList = this.$store.state.empList;
+      if (storeEmpList.length > 0 && retEmpId === 0) {
+        retEmpId = Math.max(...storeEmpList.map((m) => m.id)) + 1;
+      }
+
+      return retEmpId;
+    },
   },
 };
 </script>

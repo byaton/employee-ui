@@ -26,11 +26,6 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      projects: [
-        { id: 1, name: "Amit1", description: "Description1", startDate: "2022-01-09", employees: [1, 2, 4] },
-        { id: 2, name: "Amit2", description: "Description2", startDate: "2022-02-09", employees: [1, 2, 3] },
-        { id: 3, name: "Amit3", description: "Description3", startDate: "2022-03-09", employees: [1, 2, 3] },
-      ],
       projectColumns: ["id", "name", "description", "date", "empIds"],
       storeProjectList: this.$store.state.projectList,
     };
@@ -38,15 +33,14 @@ export default {
   methods: {
     ...mapActions(["getProjects"]),
     onProjectSelect: (project) => {
-      console.log("Amit2", project);
       router.push({
         name: "CreateProject",
         params: {
           projectId: project.id,
           projectName: project.name,
           projectDescription: project.description,
-          projectStartDate: project.startDate,
-          projectEmployees: project.employees,
+          projectStartDate: project.date,
+          projectEmployees: project.empIds,
         },
       });
     },

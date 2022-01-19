@@ -42,20 +42,12 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      employees: [
-        { id: 1, name: "Amit1" },
-        { id: 2, name: "Amit2" },
-        { id: 3, name: "Amit3" },
-        { id: 4, name: "Amit4" },
-        { id: 5, name: "Amit5" },
-      ],
       storeEmpList: this.$store.state.empList,
       employeeColumns: ["id", "name"],
     };
   },
   methods: {
     onEmployeeSelect: (emp) => {
-      console.log("Amit1", emp.id, emp.name);
       router.push({
         name: "CreateEmployee",
         params: {
