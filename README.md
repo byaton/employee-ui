@@ -7,23 +7,11 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
+Before this is executed, the Server side code is to be executed with the below command:
+npm start
+
+
+Then, this Vue code to be executed
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
