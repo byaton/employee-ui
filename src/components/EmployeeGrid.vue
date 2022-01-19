@@ -1,21 +1,7 @@
 <template>
-  <div class="about">
+  <div class="all-form">
     <div class="employee-data">
       <table>
-        <!-- <thead>
-          <tr>
-            <th
-              v-for="(ec, index) in employeeColumns"
-              @click="sortBy(ec)"
-              :key="index"
-              :class="{ active: sortKey == ec }"
-            >
-              {{ ec }}
-              <span class="arrow" :class="sortOrders[ec] > 0 ? 'asc' : 'dsc'">
-              </span>
-            </th>
-          </tr>
-        </thead> -->
         <thead>
           <th :key="index" v-for="(ec, index) in employeeColumns">{{ ec }}</th>
         </thead>
@@ -64,11 +50,16 @@ export default {
     if (this.$store.state.empList.length === 0) {
       this.$store.dispatch("getEmployees");
     }
-  }
+  },
 };
 </script>
 
 <style scoped>
+.all-form {
+  height: 100vh;
+  background-color: beige;
+}
+
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;
@@ -85,9 +76,6 @@ th {
   background-color: #42b983;
   color: rgba(255, 255, 255, 0.66);
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -101,37 +89,7 @@ td {
   padding: 10px 20px;
 }
 
-th.active {
-  color: #fff;
-}
-
-th.active .arrow {
-  opacity: 1;
-}
-
-/* .employee-data {
-  min-height: 5rem;
-  min-width: 5rem;
-} */
-
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
-
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #fff;
-}
-
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #fff;
+.employee-data {
+  margin-left: 41rem;
 }
 </style>
